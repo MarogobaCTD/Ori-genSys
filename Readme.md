@@ -5,7 +5,7 @@
 
 Repositório do desenvolvido do sistema **Ori-genSys** como parte da implementação do TCC envolvendo as disciplinas gerais do curso de Desenvolvimento Web e Mobile.
 
-[![Link do curso](https://sig.ifsudestemg.edu.br/sigaa/public/curso/portal.jsf?id=26298482&lc=pt_BR) 
+[![Link do curso](Pós Desenvolvimento Web e Mobile)](https://sig.ifsudestemg.edu.br/sigaa/public/curso/portal.jsf?id=26298482&lc=pt_BR)
 
 ## Objetivo
 Aprender o desenvolvimento de uma aplicação Web e Mobile publicando no GitHub o Desenvolvimento.
