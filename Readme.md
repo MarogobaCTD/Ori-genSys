@@ -48,7 +48,7 @@ O objetivo geral da pesquisa é desenvolver a aplicação Gestão de Projetos Cu
 
 #### Utilitários
 
-[![TypeScript](https://www.typescriptlang.org/docs/)
+[![TypeScript](https://img.shields.io/badge/Typscript-000?logo=typescript)](https://www.typescriptlang.org/docs/)
 [![Nodejs](https://nodejs.org/en)
 [![React](https://react.dev/)
 [![PrismaORM](https://www.prisma.io/orm)
