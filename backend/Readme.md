@@ -1,12 +1,11 @@
-<h1>
-    <a href="https://sig.ifsudestemg.edu.br/sigaa/public/curso/portal.jsf?id=26298482&lc=pt_BR">     
-    <span> Contribuindo um Projeto Open Source da Pós Desenvolvimento Web e Mobile - IFSudesteMG - 2025</span>
+<h1>    
+    <span> Desenvolvimento Back-End da Pós Desenvolvimento Web e Mobile - IFSudesteMG - 2025</span>
 </h1>
 
-Repositório do desenvolvido do sistema **Ori-genSys** como parte da implementação do TCC envolvendo as disciplinas gerais do curso de Desenvolvimento Web e Mobile.
+Repositório do desenvolvido Back-End do sistema **Ori-genSys** como resultado da implementação da matéria Back-End e as atividades solicitadas pelo professor ao longo das aulas.
 
 ## Objetivo
-Aprender o desenvolvimento de uma aplicação Web e Mobile publicando no GitHub o Desenvolvimento.
+Aplicar o que foi aprendido ao longo das aulas no sistema Ori-genSys.
 
 ## Ferramentas
 [![GitHub](https://img.shields.io/badge/GitHub-000?style=for-the-badge&logo=github&logoColor=30A3DC)](https://docs.github.com/)
@@ -23,37 +22,72 @@ Aprender o desenvolvimento de uma aplicação Web e Mobile publicando no GitHub 
   <tbody align="left">
     <tr>
       <td>01</td>
-      <td>Desenvolvimento em Front-End</td>
+      <td>Implementação da API</td>
     </tr>
     <tr>
       <td>02</td>
-      <td>Desenvolvimento Back-End</td>
+      <td></td>
     </tr>
     <tr>
       <td>03</td>
-      <td>Desenvolvendo Mobile</td>  
+      <td></td>  
     </tr>
     <tr>
       <td>04</td>
-      <td>Dicas e Materiais de Apoio</td>    
+      <td></td>    
     </tr>
   </tbody>
 </table>
 
 ---
-## Desafio do Projeto
-O objetivo geral da pesquisa é desenvolver a aplicação Gestão de Projetos Culturais Ori-genSys, com o propósito de contribuir para a organização, gestão e administração de projetos culturais realizados por agentes culturais.
+## Implementação da API
+Implementação uma API back-end em Node.js + TypeScript + Express que persiste produtos em um banco PostgreSQL. Use Docker/Docker Compose para subir o banco e Prisma para modelagem, migrations e seed. Teste os endpoints com Insomnia.
 
-#### Utilitários
+#### Instruções de execução 
 
-[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/docs/)
-[![Nodejs](https://img.shields.io/badge/node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white)](https://nodejs.org/en)
-[![React](https://img.shields.io/badge/-ReactJs-61DAFB?logo=react&logoColor=white&style=for-the-badge)](https://react.dev/)
-[![PrismaORM](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)](https://www.prisma.io/orm)
-[![Postegresql](https://img.shields.io/badge/postgresql-4169e1?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
-[![VSCode](https://img.shields.io/badge/VSCode-3178C6?style=for-the-badge&logo=vscode&logoColor=white)](https://code.visualstudio.com/)
+- Baixe o projeto e o abra no VSCode
+- Execute todos os comandos abaixo pelo terminal do VSCode
+- É preciso ter o Nodejs na versão 20 pois na 22 há instabilidade com o Prisma.
+
+**Instalando o Express e o TypeScript**
+- Instalar o Express e o Typescript
+npm install express
+npm install -D typescript @types/node @types/express tsx
+- Iniciar o typescript
+npm tsc --init
+
+**Instalando o Docker e o TypeScript**
+- Baixar o ![Docker](https://img.shields.io/badge/Docker-257?style=for-the-badge&logo=docker)(https://www.docker.com/) na sua máquina e após instalação, verificar se ela está executando
+- Voltar no VSCode e digitar no terminal para ver as versões do Docker e docker-compose:
+docker --version
+docker-compose --version
+- Subir o Docker
+docker-compose up -d
+
+**Instalando o Prisma e o Prisma client**
+- Pelo terminal digiter as linhas abaixo para instalar o prisma e o prisma/client:
+npm install -D prisma
+npm install @prisma/client
+- Para iniciar o prisma:
+npx prisma init
+- Para realizar a migrate do prisma, isso é a migração e criação dos schema das tabelas:
+npx prisma migrate dev --name init
+- Observações:
+  - Caso seja preciso resetar a migração e criar novamente o schema das tabelas
+    - npx prisma migrate reset
+- Para visualizar as tabelas criadas pelo Prisma Studio
+npx prisma studio
+
+** Executando o seed com informações para popular o banco**
+npx prisma db seed
+
+** Executando o testConnection para ver a API**
+npx tsx src/testConnection.ts
+
+** Excutando a API para consumir no Insomnia
+npm run dev
 
 > [!IMPORTANT]   
-> Nada a declarar
+> É preciso ter o Nodejs na versão 20 pois na 22 há instabilidade com o Prisma.
 
 ---
