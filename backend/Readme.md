@@ -77,15 +77,19 @@ npx prisma migrate dev --name init
     - npx prisma migrate reset
 	
 **Visualizar as tabelas pelo Prisma Studio**
+
 npx prisma studio
 
 **Executando o seed com informações para popular o banco**
+
 npx prisma db seed
 
 **Executando o testConnection para ver a API**
+
 npx tsx src/testConnection.ts
 
-**Excutando a API para consumir no Insomnia
+**Excutando a API para consumir no Insomnia**
+
 npm run dev
 
 > [!IMPORTANT]   
