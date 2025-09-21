@@ -4,7 +4,7 @@ CREATE TABLE "public"."agente" (
     "nome" VARCHAR(255) NOT NULL,
     "nome_Artistico" VARCHAR(255) NOT NULL,
     "drt" VARCHAR(30) NOT NULL,
-    "curriculo_reumido" TEXT NOT NULL,
+    "curriculo_Resumido" TEXT NOT NULL,
     "data_criacao" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "data_atualizacao" TIMESTAMP(3) NOT NULL,
 

@@ -1,7 +1,7 @@
 export interface agenteDTO{
     nome: string;
-    nome_artistico: string;
+    nome_Artistico: string;
     drt: string;
-    curriculo_resumido: string
+    curriculo_Resumido: string
 }
 

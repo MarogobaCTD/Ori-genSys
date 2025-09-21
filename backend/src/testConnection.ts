@@ -1,4 +1,4 @@
-import { PrismaClient } from './generated/prisma'
+import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
@@ -8,7 +8,7 @@ async function test() {
 
     
     // Veja a mágica: o TypeScript conhece TODOS os campos!
-    agentes.forEach(agente => {
+    agentes.forEach((agente: { nome_Artistico: any; drt: any }) => {
         console.log(`${agente.nome_Artistico} - DRT: ${agente.drt}`)        
     })
 

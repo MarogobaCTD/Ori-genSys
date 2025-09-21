@@ -1,4 +1,4 @@
-import { PrismaClient, Agente, Prisma } from './generated/prisma'
+import { PrismaClient, Prisma } from '@prisma/client'
 import { agenteDTO } from './dto/agente'
 
 export class agenteService {
@@ -8,7 +8,7 @@ export class agenteService {
         this.prisma = new PrismaClient()
     }
 
-    async findByAll(): Promise<Agente[]> {
+    async findByAll(): Promise<agenteDTO[]> {
         const agentes = await this.prisma.agente.findMany()
         //agentes.forEach(agente => {
         //    console.log(`${agente.nome_Artistico} - DRT: ${agente.drt}`)
@@ -16,27 +16,27 @@ export class agenteService {
         return agentes
     }
 
-    async findByDrt(drt: string): Promise<Agente | null> {
+    async findByDrt(drt: string): Promise<agenteDTO | null> {
         return this.prisma.agente.findFirst({ where: { drt } })
     }
     
-    async createAgente(agente: agenteDTO): Promise<Agente> {
+    async createAgente(agente: agenteDTO): Promise<agenteDTO> {
         return this.prisma.agente.create({ data: {
                           nome: agente.nome,
-                          nome_Artistico: agente.nome_artistico,
+                          nome_Artistico: agente.nome_Artistico,
                           drt: agente.drt,
-                          curriculo_reumido: agente.curriculo_resumido,           
+                          curriculo_Resumido: agente.curriculo_Resumido,           
         } })
     }
 
-    async updateAgente(id: number, agente: agenteDTO ): Promise<Agente> {
+    async updateAgente(id: number, agente: agenteDTO ): Promise<agenteDTO> {
       
         const agenteAtual: Partial<agenteDTO> = {}
 
         if (agente.nome !== undefined) agenteAtual.nome = agente.nome
-        if (agente.nome_artistico !== undefined) agenteAtual.nome_artistico = agente.nome_artistico
+        if (agente.nome_Artistico !== undefined) agenteAtual.nome_Artistico = agente.nome_Artistico
         if (agente.drt !== undefined) agenteAtual.drt = agente.drt
-        if (agente.curriculo_resumido !== undefined) agenteAtual.curriculo_resumido = agente.curriculo_resumido
+        if (agente.curriculo_Resumido !== undefined) agenteAtual.curriculo_Resumido = agente.curriculo_Resumido
 
         return this.prisma.agente.update({
             where: { id_Agente: id },
@@ -44,7 +44,7 @@ export class agenteService {
         })
     }
 
-    async deleteAgente(id: number): Promise<Agente | null>{
+    async deleteAgente(id: number): Promise<agenteDTO | null>{
 
        try {
             const agenteDeletado = await this.prisma.agente.delete({where: { id_Agente: id }, })

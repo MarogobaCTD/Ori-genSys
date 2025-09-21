@@ -4,15 +4,14 @@
   "description": "",
   "main": "index.js",
   "prisma": {
-    "seed": "tsx prisma/seed.ts",
-    "migrate": "migrate dev --name init"
+    "seed": "tsx prisma/seed.ts"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsx watch src/server.ts",
     "debug": "node --inspect-brk -r tsx/register src/server.ts",
     "seed": "tsx prisma/seed.ts",
-    "migrate": "migrate dev --name init"
+    "migrate": "npx prisma migrate dev --name init"
   },
   "keywords": [],
   "author": "",
