@@ -57,7 +57,7 @@ npm install -D typescript @types/node @types/express tsx
 npm tsc --init
 
 **Instalando o Docker e o TypeScript**
-- Baixar o ![Docker](https://img.shields.io/badge/Docker-257?style=for-the-badge&logo=docker)(https://www.docker.com/) na sua máquina e após instalação, verificar se ela está executando
+- Baixar o [![Docker](https://img.shields.io/badge/Docker-257?style=for-the-badge&logo=docker)](https://www.docker.com/) na sua máquina e após instalação, verificar se ela está executando
 - Voltar no VSCode e digitar no terminal para ver as versões do Docker e docker-compose:
 docker --version
 docker-compose --version
@@ -75,16 +75,17 @@ npx prisma migrate dev --name init
 - Observações:
   - Caso seja preciso resetar a migração e criar novamente o schema das tabelas
     - npx prisma migrate reset
-- Para visualizar as tabelas criadas pelo Prisma Studio
+	
+**Visualizar as tabelas pelo Prisma Studio**
 npx prisma studio
 
-** Executando o seed com informações para popular o banco**
+**Executando o seed com informações para popular o banco**
 npx prisma db seed
 
-** Executando o testConnection para ver a API**
+**Executando o testConnection para ver a API**
 npx tsx src/testConnection.ts
 
-** Excutando a API para consumir no Insomnia
+**Excutando a API para consumir no Insomnia
 npm run dev
 
 > [!IMPORTANT]   
