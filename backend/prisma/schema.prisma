@@ -1,0 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Agente {
+  id_Agente          Int       @id @default(autoincrement())
+  nome               String    @db.VarChar(255)
+  nome_Artistico     String    @db.VarChar(255)
+  drt                String    @db.VarChar(30)    
+  curriculo_resumido String    @db.Text  
+  data_Criacao       DateTime  @default(now())   @map("data_criacao")
+  data_Atualizacao   DateTime  @updatedAt        @map("data_atualizacao")
+
+  // Relacionamentos inversos
+  projetos     Projetos[]
+  notasFiscais NotasFiscais[]
+
+  @@map("agente")
+}
+
+model Projetos {
+  id_Projeto       Int       @id @default(autoincrement())
+  titulo           String    @db.VarChar(255)
+  descricao        String    @db.Text
+  edital           String    @db.VarChar(255)
+  valor            Decimal   @db.Decimal(10, 2)
+  inicio           DateTime  @db.Date
+  fim              DateTime  @db.Date
+  id_Proponente    Int
+  proponente       Agente    @relation(fields: [id_Proponente], references: [id_Agente])
+  data_Criacao     DateTime  @default(now())   @map("data_criacao")
+  data_Atualizacao DateTime  @updatedAt        @map("data_atualizacao")
+
+  // Relacionamento inverso
+  notasFiscais NotasFiscais[]
+
+  @@map("projetos")
+}
+
+model NotasFiscais {
+  id_Nota          Int       @id @default(autoincrement())
+  numero           Int
+  serie            Int
+  data_Emissao     DateTime  @db.Date
+  valor            Decimal   @db.Decimal(10, 2)
+  situacao         String    @db.Text
+  nf_Paga          Boolean   @default(false) @map("nf_paga")
+  id_Agente        Int
+  agente           Agente    @relation(fields: [id_Agente], references: [id_Agente])
+  id_Projeto       Int
+  projeto          Projetos  @relation(fields: [id_Projeto], references: [id_Projeto])
+  data_Criacao     DateTime  @default(now()) @map("data_criacao")
+  data_Atualizacao DateTime  @updatedAt      @map("data_atualizacao")
+
+  @@map("notasFiscais")
+}
