@@ -110,6 +110,7 @@ export const createAgenteSchema = z.object({
   drt: z.string().min(1, 'DRT não pode ser vazio!'),
   curriculo_Resumido: z.string().min(100, 'Currículo resumido deve ter pelo menos 100 caracteres')
 });
+```
 
 Nos métodos POST e PUT você pode utilizá-lo para validar
 
