@@ -93,11 +93,13 @@ npx tsx src/testConnection.ts
 npm run dev
 
 **Instalando o Zod**
+
 Ele é uma biblioteca de validação de dados e tipagem em tempo de excução pelo TS e JS, pode determinar como aquela informação será estruturada, podendo validar o objeto ter a forma e valores válidos.
 
 npm install zod
 
 Instruções:
+
 É preciso criar o schema para o zod realizar a validação e tipagem em tempo de execução
   Exemplo: 
   export const createAgenteSchema = z.object({
