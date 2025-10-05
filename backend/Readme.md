@@ -25,16 +25,16 @@ Aplicar o que foi aprendido ao longo das aulas no sistema Ori-genSys.
       <td>Implementação da API</td>
     </tr>
     <tr>
+      <td>02</td>
       <td>Implementação da API no FrontEnd</td>
-      <td></td>
     </tr>
     <tr>
-      <td>Testes</td>
-      <td></td>  
+      <td>03</td>
+      <td>Testes</td>  
     </tr>
     <tr>
-      <td>Documentação</td>
-      <td></td>    
+      <td>04</td>
+      <td>Documentação</td>    
     </tr>
   </tbody>
 </table>
