@@ -102,15 +102,14 @@ Instruções:
 
 É preciso criar o schema para o zod realizar a validação e tipagem em tempo de execução
 
-Exemplo: 
-
-  export const createAgenteSchema = 
-    z.object({
-       nome: z.string().min(3, 'O nome deve ter pelo menos 3 caracteres'),
-       nome_Artistico: z.string().min(3, 'O nome artistico deve ter pelo menos 3 caracteres'),    
-       drt: z.string().min(1, 'DRT não pode ser vazio!'),
-       curriculo_Resumido: z.string().min(100, 'Currículo resumido deve ter pelo menos 100 caracteres')
-  })
+### 🧩 Validação do schema `Agente`
+```ts
+export const createAgenteSchema = z.object({
+  nome: z.string().min(3, 'O nome deve ter pelo menos 3 caracteres'),
+  nome_Artistico: z.string().min(3, 'O nome artistico deve ter pelo menos 3 caracteres'),
+  drt: z.string().min(1, 'DRT não pode ser vazio!'),
+  curriculo_Resumido: z.string().min(100, 'Currículo resumido deve ter pelo menos 100 caracteres')
+});
 
 Nos métodos POST e PUT você pode utilizá-lo para validar
 
