@@ -101,6 +101,7 @@ npm install zod
 Instruções:
 
 É preciso criar o schema para o zod realizar a validação e tipagem em tempo de execução
+
   Exemplo: 
   export const createAgenteSchema = z.object({
     nome: z.string().min(3, 'O nome deve ter pelo menos 3 caracteres'),
@@ -110,13 +111,20 @@ Instruções:
   })
 
   - Nos métodos POST e PUT você pode utilizá-lo para validar
+
   Exemplo:
+
   POST:  
+
      const agente = createAgenteSchema.parse(req.body) //valida e transforma o json em objeto
+
   PUT: 
+
     Antes do app.put: const updateAgenteSchema = createAgenteSchema.partial()
     Dentro do app.put: const agente = updateAgenteSchema.parse(req.body) // valida parciais
+
   TRATANDO A MENSAGEM DE ERRO:
+
     if (error instanceof ZodError) {
             return res.status(400).json({
                 error: 'Payload inválido',
