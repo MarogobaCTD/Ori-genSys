@@ -97,9 +97,8 @@ Ele é uma biblioteca de validação de dados e tipagem em tempo de excução pe
 
 npm install zod
 
-> [!IMPORTANT]   
-> É preciso ter o Nodejs na versão 20 pois na 22 há instabilidade com o Prisma.
-> É preciso criar o schema para o zod realizar a validação e tipagem em tempo de execução
+Instruções:
+É preciso criar o schema para o zod realizar a validação e tipagem em tempo de execução
   Exemplo: 
   export const createAgenteSchema = z.object({
     nome: z.string().min(3, 'O nome deve ter pelo menos 3 caracteres'),
@@ -125,9 +124,10 @@ npm install zod
                 })),
             })
         }
-    
 
 
+> [!IMPORTANT]   
+> É preciso ter o Nodejs na versão 20 pois na 22 há instabilidade com o Prisma.
 
 
 ---
