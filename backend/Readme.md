@@ -25,25 +25,26 @@ Aplicar o que foi aprendido ao longo das aulas no sistema Ori-genSys.
       <td>Implementação da API</td>
     </tr>
     <tr>
-      <td>02</td>
+      <td>Implementação da API no FrontEnd</td>
       <td></td>
     </tr>
     <tr>
-      <td>03</td>
+      <td>Testes</td>
       <td></td>  
     </tr>
     <tr>
-      <td>04</td>
+      <td>Documentação</td>
       <td></td>    
     </tr>
   </tbody>
 </table>
 
+
 ---
 ## Implementação da API
 Implementação uma API back-end em Node.js + TypeScript + Express que persiste produtos em um banco PostgreSQL. Use Docker/Docker Compose para subir o banco e Prisma para modelagem, migrations e seed. Teste os endpoints com Insomnia.
 
-#### Instruções de execução 
+### Instruções de execução 
 
 - Baixe o projeto e o abra no VSCode
 - Execute todos os comandos abaixo pelo terminal do VSCode
@@ -98,7 +99,7 @@ Ele é uma biblioteca de validação de dados e tipagem em tempo de excução pe
 
 npm install zod
 
-**Instruções:**
+**Utilização do Zod**
 
 É preciso criar o schema para o zod realizar a validação e tipagem em tempo de execução
 
@@ -112,7 +113,7 @@ export const createAgenteSchema = z.object({
 });
 ```
 
-Nos métodos POST e PUT você pode utilizá-lo para validar
+Nos métodos `POST` e `PUT` você pode utilizá-lo para validar
 
 Exemplo:
 

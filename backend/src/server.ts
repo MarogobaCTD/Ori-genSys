@@ -190,7 +190,7 @@ app.delete('/agente/:id', async (req: Request<{id: number}>, res: Response) => {
         }
 
         const agenteDeletado = await src_agente.deleteAgente(id)
-        return res.status(204).json(agenteDeletado)
+        return res.status(204).send()
 
     } catch(error){
         console.error('Erro: ', error)
