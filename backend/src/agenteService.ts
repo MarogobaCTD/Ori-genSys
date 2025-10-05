@@ -16,6 +16,10 @@ export class agenteService {
         return agentes
     }
 
+    async findUnique(id: number){
+        return this.prisma.agente.findUnique({where: { id_Agente: id } })
+    }
+
     async findByDrt(drt: string): Promise<agenteDTO | null> {
         return this.prisma.agente.findFirst({ where: { drt } })
     }
@@ -29,7 +33,7 @@ export class agenteService {
         } })
     }
 
-    async updateAgente(id: number, agente: agenteDTO ): Promise<agenteDTO> {
+    async updateAgente(id: number, agente: Partial<Record<keyof agenteDTO, string | undefined>> ): Promise<agenteDTO> {
       
         const agenteAtual: Partial<agenteDTO> = {}
 
@@ -45,16 +49,8 @@ export class agenteService {
     }
 
     async deleteAgente(id: number): Promise<agenteDTO | null>{
-
-       try {
-            const agenteDeletado = await this.prisma.agente.delete({where: { id_Agente: id }, })
-            return agenteDeletado
-        } catch (error) {            
-            if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') {            
-              return null
-            }
-            throw error
-        }
+        const agenteDeletado = await this.prisma.agente.delete({where: { id_Agente: id }, })
+        return agenteDeletado
     }
 
     async disconnect() {

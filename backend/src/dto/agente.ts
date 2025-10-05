@@ -5,3 +5,5 @@ export interface agenteDTO{
     curriculo_Resumido: string
 }
 
+
+

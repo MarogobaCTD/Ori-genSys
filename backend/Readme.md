@@ -92,7 +92,42 @@ npx tsx src/testConnection.ts
 
 npm run dev
 
+**Instalando o Zod**
+Ele é uma biblioteca de validação de dados e tipagem em tempo de excução pelo TS e JS, pode determinar como aquela informação será estruturada, podendo validar o objeto ter a forma e valores válidos.
+
+npm install zod
+
 > [!IMPORTANT]   
 > É preciso ter o Nodejs na versão 20 pois na 22 há instabilidade com o Prisma.
+> É preciso criar o schema para o zod realizar a validação e tipagem em tempo de execução
+  Exemplo: 
+  export const createAgenteSchema = z.object({
+    nome: z.string().min(3, 'O nome deve ter pelo menos 3 caracteres'),
+    nome_Artistico: z.string().min(3, 'O nome artistico deve ter pelo menos 3 caracteres'),    
+    drt: z.string().min(1, 'DRT não pode ser vazio!'),
+    curriculo_Resumido: z.string().min(100, 'Currículo resumido deve ter pelo menos 100 caracteres')
+  })
+
+  - Nos métodos POST e PUT você pode utilizá-lo para validar
+  Exemplo:
+  POST:  
+     const agente = createAgenteSchema.parse(req.body) //valida e transforma o json em objeto
+  PUT: 
+    Antes do app.put: const updateAgenteSchema = createAgenteSchema.partial()
+    Dentro do app.put: const agente = updateAgenteSchema.parse(req.body) // valida parciais
+  TRATANDO A MENSAGEM DE ERRO:
+    if (error instanceof ZodError) {
+            return res.status(400).json({
+                error: 'Payload inválido',
+                issues: error.issues.map((e) => ({
+                    path: e.path.join('.'),
+                    message: e.message,
+                })),
+            })
+        }
+    
+
+
+
 
 ---
