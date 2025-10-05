@@ -98,7 +98,7 @@ Ele é uma biblioteca de validação de dados e tipagem em tempo de excução pe
 
 npm install zod
 
-Instruções:
+**Instruções:**
 
 É preciso criar o schema para o zod realizar a validação e tipagem em tempo de execução
 
