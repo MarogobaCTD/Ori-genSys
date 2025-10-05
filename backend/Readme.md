@@ -103,6 +103,7 @@ Instruções:
 É preciso criar o schema para o zod realizar a validação e tipagem em tempo de execução
 
   Exemplo: 
+  
   export const createAgenteSchema = z.object({
     nome: z.string().min(3, 'O nome deve ter pelo menos 3 caracteres'),
     nome_Artistico: z.string().min(3, 'O nome artistico deve ter pelo menos 3 caracteres'),    
