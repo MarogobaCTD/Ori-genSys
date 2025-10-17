@@ -208,6 +208,85 @@ com a sua JWT_SECRET (pode ser uma frase, sequência de caracteres que faça sen
         { expiresIn: process.env.JWT_EXPIRES || '7d' }  as SignOptions// Token expira conf. env ou em 7 dias
     )
 
+======================================
+MIDDLEWARE
+
+Para criar uma validação e permissão para utilizar os serviços, você pode gerar um
+middleware para validar o token passado e liberar os serviços.
+
+- Exemplo:
+
+      /**
+      * Middleware de autenticação
+      * - Extrai token do header Authorization
+      * - Verifica se token é válido
+      * - Busca usuário no banco
+      * - Anexa usuário à requisição para uso posterior
+      */
+      const authMiddleware = async (req: AuthRequest, res: Response, next: any) => {
+          try {
+              // 1. Extrair token do header Authorization
+              const authHeader = req.headers.authorization
+
+              if (!authHeader) {
+                  return res.status(401).json({ error: 'Token de acesso não fornecido' })
+              }
+
+              // Header deve ser: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+              const token = authHeader.split(' ')[1]
+
+              if (!token) {
+                  return res.status(401).json({ error: 'Formato do token inválido' })
+              }
+
+              if (!process.env.JWT_SECRET) {
+                throw new Error("JWT_SECRET não definida no .env");
+              }
+
+              // 2. Verificar se token é válido
+              const decoded = jwt.verify(token, process.env.JWT_SECRET) as { userId: number }
+
+              // 3. Buscar usuário no banco
+              const user = await src_usuario.findUnique(decoded.userId)
+
+              if (!user) {
+                  return res.status(401).json({ error: 'Usuário não encontrado' })
+              }
+
+              // 4. Anexar usuário à requisição
+              req.user = user
+
+              // 5. Continuar para a próxima função (rota final)
+              next()
+
+          } catch (error) {
+              if (error instanceof jwt.JsonWebTokenError) {
+                  return res.status(401).json({ error: 'Token inválido' })
+              }
+              if (error instanceof jwt.TokenExpiredError) {
+                  return res.status(401).json({ error: 'Token expirado' })
+              }
+              return res.status(500).json({ error: 'Erro interno do servidor' })
+          }
+      }
+
+É importante criar uma interface para estender o Request do Express e que será 
+utilizado na validação do middleare 
+
+    interface AuthRequest extends Request {
+        user?: {
+            id_usuario: number
+            email: string
+            nome?: string | null
+        }
+    }
+
+Após a criação é só "anexar" na requisição para ser validado e token e verificar
+se é liberado ou não para o usuário
+
+    // Inserir um novo agente
+    app.post('/agentes', **authMiddleware**, async (req: AuthRequest, res: Response) => {
+
 
 > [!IMPORTANT]   
 > É preciso ter o Nodejs na versão 20 pois na 22 há instabilidade com o Prisma.
