@@ -65,3 +65,15 @@ model NotasFiscais {
 
   @@map("notasFiscais")
 }
+
+//Tabeça usada para cadastro de usuários do sistema
+model Usuario {
+  id_usuario       Int      @id @default(autoincrement())
+  email            String   @unique
+  senha            String   // Sempre será armazenado como hash, nunca texto puro
+  nome             String?  // Campo opcional para nome do usuário
+  data_Criacao     DateTime @default(now())
+  data_Atualizacao DateTime @updatedAt
+
+  @@map("usuarios") // Nome da tabela no banco será "users"
+}
