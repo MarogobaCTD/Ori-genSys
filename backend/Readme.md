@@ -56,7 +56,7 @@ npm install express
 npm install -D typescript @types/node @types/express tsx
 - Iniciar o typescript
 npm tsc --init
-
+======================================
 **Instalando o Docker e o TypeScript**
 - Baixar o [![Docker](https://img.shields.io/badge/Docker-257?style=for-the-badge&logo=docker)](https://www.docker.com/) na sua máquina e após instalação, verificar se ela está executando
 - Voltar no VSCode e digitar no terminal para ver as versões do Docker e docker-compose:
@@ -64,7 +64,7 @@ docker --version
 docker-compose --version
 - Subir o Docker
 docker-compose up -d
-
+======================================
 **Instalando o Prisma e o Prisma client**
 - Pelo terminal digiter as linhas abaixo para instalar o prisma e o prisma/client:
 npm install -D prisma
@@ -76,23 +76,23 @@ npx prisma migrate dev --name init
 - Observações:
   - Caso seja preciso resetar a migração e criar novamente o schema das tabelas
     - npx prisma migrate reset
-	
+======================================	
 **Visualizar as tabelas pelo Prisma Studio**
 
 npx prisma studio
-
+======================================
 **Executando o seed com informações para popular o banco**
 
 npx prisma db seed
-
+======================================
 **Executando o testConnection para ver a API**
 
 npx tsx src/testConnection.ts
-
+======================================
 **Excutando a API para consumir no Insomnia**
 
 npm run dev
-
+======================================
 **Instalando o Zod**
 
 Ele é uma biblioteca de validação de dados e tipagem em tempo de excução pelo TS e JS, pode determinar como aquela informação será estruturada, podendo validar o objeto ter a forma e valores válidos.
@@ -102,6 +102,38 @@ npm install zod
 **Utilização do Zod**
 
 É preciso criar o schema para o zod realizar a validação e tipagem em tempo de execução
+======================================
+**Instalação do Dotenv para visualizar a referências**
+Ele é uma biblioteca que carrega variáveis de ambiente definidas em um arquivo chamado .env e as disponibiliza em process.env dentro da aplicação.
+
+npm install dotenv
+npm install --save-dev @types/dotenv
+======================================
+**Criação da solução de autenticação - Instalação das bibliotecas necesárias**
+bcryptjs - protege a senha com criptografia (hash)
+jsonwebtoken - cria passes (token) para acessos e autenticação para realizar as atividades
+
+**Instalar o bcrypt**
+npm install bcrypt
+npm install --save-dev @types/bcrypt
+
+**Instalar o jsonwebtoken**
+npm install jsonwebtoken
+npm install --save-dev @types/jsonwebtoken
+
+**Instalar os dois de uma só vez**
+npm install bcryptjs jsonwebtoken
+npm install -D @types/bcryptjs @types/jsonwebtoken
+======================================
+**Criar uma nova tabela no banco**
+npx prisma migrate dev --name create-usuario
+======================================
+**Caso seja preciso limpar o cache e gerar novamente os módulos**
+Limpando o cache e gerando node novamente
+rm -rf node_modules/.prisma
+rm -rf node_modules
+npm install
+npx prisma generate
 
 ### 🧩 Validação do schema `Agente`
 ```ts
@@ -137,6 +169,44 @@ Exemplo:
                 })),
             })
         }
+
+## 🧩 Usando o bcrypt e o Jwt
+
+BCRYPT
+
+A utilização do bcrypt é bem simples, você precisará determinar quantos caracteres
+serão usados para o hash, 10 rounds é um bom padrão de segurança.
+
+- Exemplo:
+  const hashedPassword = await bcrypt.hash(senha, 10)
+
+  //Passa no DTO ou na criadão do usuário pelo create do Prisma
+  const usuario: usuarioDTO = {
+            email: email,
+            senha: hashedPassword,
+            nome: nome ?? null
+  };
+
+  const novoUsuario = await src_usuario.createUsuario(usuario)
+
+======================================
+JWT
+
+A utilização do jwt serve para realizar a autenticação do usuário e geração do token 
+com a sua JWT_SECRET (pode ser uma frase, sequência de caracteres que faça sentido)
+
+- Exemplo
+    //Utilizando o dotEnv para retornar a JWT_SECRET   
+    if (!process.env.JWT_SECRET) {
+       throw new Error("JWT_SECRET não definida no .env");
+    }
+
+    //Gerar token JWT
+    const token = jwt.sign(
+        { userId: novoUsuario.id_usuario }, // Payload: informações que queremos no token
+        process.env.JWT_SECRET,
+        { expiresIn: process.env.JWT_EXPIRES || '7d' }  as SignOptions// Token expira conf. env ou em 7 dias
+    )
 
 
 > [!IMPORTANT]   
